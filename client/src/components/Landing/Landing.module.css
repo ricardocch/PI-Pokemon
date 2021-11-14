@@ -1,0 +1,51 @@
+.Landing{
+    background-color: #f51326;
+    display: flex;
+    height: 100vh;
+}
+
+.imgLanding {
+    width: 60%;
+    max-width: 765px;
+}
+  
+.welcome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.welcome_panel {
+    width: 80%;
+    background-color: #247bc5;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 15px;
+    align-items: center;
+}
+
+.welcome_panel h3{
+    color: #f1fcfb;
+    padding: 0 30px 0 10px;
+}
+
+.welcome_panel a {
+    width: 90%;
+    text-align: right;
+}
+
+.welcome_panel button{
+    color: #f51326;
+    background-color: #fede00;
+    width: 100%;
+    font-size: 25px;
+    font-weight: 700;
+    height: 88px;
+}
+
+.welcome_panel button:hover{
+    background-color: yellow;
+    color: #247bc5;
+}

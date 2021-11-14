@@ -1,0 +1,12 @@
+.Pagination{
+    background-color: #f51326;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.Pagination button{
+    background-color: yellow;
+    color: red;
+    font-weight: 600;
+    margin-right: 5px;
+}

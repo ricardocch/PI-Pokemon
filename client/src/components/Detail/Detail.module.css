@@ -1,0 +1,18 @@
+.Detail {
+    background-color: #ebedec;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.Detail .Back{
+    width: 100%;
+    padding: 10px 0 0 20px;
+}
+
+.Detail .Back img{
+    height: 30px;
+    cursor: pointer;
+}

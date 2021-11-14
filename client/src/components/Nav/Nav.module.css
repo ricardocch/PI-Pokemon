@@ -1,0 +1,47 @@
+.Nav{
+    height: 50px;
+    background-color: #f51326;
+    color: yellow;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 5px 20px;
+}
+
+.Actions{
+    display: inline;
+    float: right;
+    padding: 5px 0;
+}
+
+.Actions button{
+    background-color: yellow;
+    color: #f51326;
+    height: 35px;
+    font-weight: 600;
+}
+
+.Actions input{
+    margin: 1px 10px;
+    background-color: #f51326;
+    border: 2px solid #2f68b1;
+    height: 20px;
+    border-radius: 2px;
+    appearance: none;
+    color: yellow;
+    padding: 5px;
+}
+
+.Actions input::placeholder {
+    color: yellow;
+}
+
+.Actions a{
+    text-decoration: none;
+    color: yellow;
+    margin-right: 15px;
+}
+
+.Actions a:hover,
+.Actions button:hover{
+    color: #2f68b1;
+}

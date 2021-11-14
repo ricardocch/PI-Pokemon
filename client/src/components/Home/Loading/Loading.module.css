@@ -1,0 +1,10 @@
+.Loading{
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    align-items: center;
+}
+
+.Loading img{
+    height: 300px;
+}

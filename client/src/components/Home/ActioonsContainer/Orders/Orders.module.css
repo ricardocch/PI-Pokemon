@@ -1,0 +1,13 @@
+.Orders{
+    display: flex;
+    justify-content: flex-end;
+    width: 60%;
+}
+
+.Orders button{
+    font-size: 12px;
+    background-color: yellow;
+    color: red;
+    padding: 3px;
+    font-weight: 500;
+}

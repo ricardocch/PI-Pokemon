@@ -44,6 +44,9 @@ router.get("/types", function(req,res){
 
 router.get("/pokemons", async function(req,res){
     let query = req.query.hasOwnProperty('name') ? {where:{name:decodeURI(req.query.name)},include:Type} : {include:Type}
+    // console.log("poke")
+    try{
+    
     let PokemonsDB = await Pokemon.findAll(query);
     let pokemonAPI = null;
     
@@ -59,6 +62,7 @@ router.get("/pokemons", async function(req,res){
             attack:el.attack,
             defense:el.defense,
             speed:el.speed,
+            created:true,
             img:'',
             types:localArrTypes
         }
@@ -117,12 +121,18 @@ router.get("/pokemons", async function(req,res){
             attack:el.data.stats[1].base_stat,
             defense:el.data.stats[2].base_stat,
             speed:el.data.stats[5].base_stat,
+            created:false,
             img:el.data.sprites.front_default,
             types:localArrTypes
         }
     });
-
+    
     res.status(200).send([...pokemonAPI,...PokemonsDB])
+    }
+    catch(err){
+        console.log(err)
+        res.status(404).send(err)
+    }
 })
 
 router.get("/pokemons/:id", async function(req,res){
@@ -164,7 +174,7 @@ router.get("/pokemons/:id", async function(req,res){
         }
     }
 
-    res.status(200).send(responseJSON)
+    res.status(200).send([responseJSON])
 })
 
 
@@ -180,9 +190,10 @@ router.post('/pokemons',async function(req,res){
             defense:req.body.defense,
             speed:req.body.speed
         });
+
         
-        instance.addTypes(3)
-        instance.addTypes(7)
+       instance.addTypes(req.body.type)
+        
         res.status(200).send({...instance.toJSON(),succes:'Pokemon Creado con Exito'})
     }
     catch(err){

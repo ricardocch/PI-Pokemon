@@ -1,9 +1,25 @@
 import './App.css';
+import {Routes,Route} from 'react-router-dom';
+import Landing from './components/Landing/Landing';
+import Nav from './components/Nav/Nav';
+import Home from './components/Home/Home';
+import Detail from './components/Detail/Deatail';
 
 function App() {
+  
   return (
     <div className="App">
-      <h1>Henry Pokemon</h1>
+      
+        <Nav/>
+        <Routes>
+          <Route exact path="/" element={<Landing/>}/>
+          <Route exact path="/Home" element={<Home/>}/>
+          <Route exact path="/detail/:id" element={<Detail/>}/>
+          <Route exact path="/detail" element={<Detail/>}/>
+          <Route exact path="/create" element={<Detail/>}/>
+          <Route path="/*" element={<Landing/>}/>
+          {/* <Route exact path="/add" component={AddTodo}/> */}
+        </Routes>
     </div>
   );
 }

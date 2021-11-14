@@ -1,0 +1,36 @@
+.Pokedex{
+    width: 60%;
+    background: #f23b31;
+    margin: 50px 0;
+}
+
+.Pokedex img{
+    width: 100%;
+}
+
+.Pokedex .Middle{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.Pokedex .Middle .Display{
+    background-color: #ebedec;
+    width: 80%;
+    text-align: center;
+    padding: 20px 0;
+    color: #00050e;
+    border: 10px double #1a0003;
+}
+
+.Display img{
+    height: 90px;
+    width: auto;
+}
+
+.Display h4{
+    display: inline-block;
+    width: 45%;
+    border: 1px solid;
+    margin: 5px;
+}
