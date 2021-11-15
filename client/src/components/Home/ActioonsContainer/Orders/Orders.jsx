@@ -32,7 +32,7 @@ function Orders({orderBy}) {
           <option value="HP"> HP</option>
           <option value="Height"> Height</option>
           <option value="Weight"> Weight</option>
-          {/* <option value="Type"> Type</option> */}
+          <option value="Type"> Type</option>
       </select>
       { order === 'ASC' ? <button onClick={(e)=> changeOrder(e)}>DESC ↓↓</button> : <button onClick={(e)=> changeOrder(e)}>ASC ↑↑</button>}
 

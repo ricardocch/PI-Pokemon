@@ -9,11 +9,67 @@ const initialState = {
   createInfo:null
 };
 
-function sortAsc(arr,property){
-  
-  property = property !== '' ? property.toLowerCase() : 'id'
 
-  property = property.toLowerCase()
+function sortAscType(arr,types){
+  let newArr = []
+  let sort = true;
+
+  types.forEach( type => {
+
+    arr.forEach( el =>{
+      if(sort){
+        el.types = el.types.sort(function (a, b) {
+          if (a > b) {
+            return 1;
+          }
+          if (a < b) {
+            return -1;
+          }
+          
+          return 0;
+        });
+      }
+     
+      if(el.types[0] === type.name) newArr.push(el)
+    })   
+    sort = false
+  } )
+ 
+  return newArr;
+}
+
+
+function sortDescType(arr,types){
+  let newArr = []
+  let sort = true;
+
+  for(let i = types.length -1; i >= 0;i-- ) {
+
+    arr.forEach( el =>{
+      if(sort){
+        el.types = el.types.sort(function (a, b) {
+          if (a < b) {
+            return 1;
+          }
+          if (a > b) {
+            return -1;
+          }
+          
+          return 0;
+        });
+      }
+     
+      if(el.types[0] === types[i].name) newArr.push(el)
+    })   
+    sort = false
+  } 
+ 
+  return newArr;
+}
+
+function sortAsc(arr,property){
+  property = property !== '' ? property.toLowerCase() : 'id'
+  
   arr.sort(function (a, b) {
     if (a[property] > b[property]) {
       return 1;
@@ -24,6 +80,7 @@ function sortAsc(arr,property){
     
     return 0;
   });
+
   return arr;
 }
 
@@ -92,10 +149,17 @@ const pokemons = (state = initialState, action) => {
       case "getTypes":
   
       return {...state,
-        types:action.payload
+        types:sortAsc(action.payload,'name')
       };
       case "orderBy":
-      let tmpOrder = action.payload.order === 'ASC' ? sortAsc(state.tmpPokemons,action.payload.value) : sortDesc(state.tmpPokemons,action.payload.value)
+      let tmpOrder = null
+      
+      if(action.payload.value !== 'Type')
+        tmpOrder = action.payload.order === 'ASC' ? sortAsc(state.tmpPokemons,action.payload.value) : sortDesc(state.tmpPokemons,action.payload.value)
+      else
+        tmpOrder = action.payload.order === 'ASC' ? sortAscType(state.tmpPokemons,state.types) : sortDescType(state.tmpPokemons,state.types)
+      
+
       let tmp2 = getShowPages(tmpOrder)
       return {...state,
         tmpPokemons:tmpOrder,
