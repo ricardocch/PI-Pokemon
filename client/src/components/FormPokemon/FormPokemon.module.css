@@ -76,6 +76,11 @@
     color: white;
 }
 
+.FormPokemon .rowForm{
+    display: inline-block;
+    width: 100%;
+}
+
 .FormPokemon .columnForm{
     display: inline-block;
     width: 50%;

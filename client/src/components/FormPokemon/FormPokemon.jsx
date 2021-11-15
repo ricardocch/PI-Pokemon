@@ -112,32 +112,57 @@ function FormPokemon({types,createInfo,getTypes,createPokemon,resetStatusCreate}
   return (
     <div className={style.FormPokemon}>
         <form onSubmit={(e) => onSubmit(e)} ref={refForm}>
-        <label>Name</label>
+            <label>Name</label>
             <input type="text" placeholder="Enter name" name="name" onBlur={(e)=> onBlur(e)} tabIndex="1"/>
             { errors.name  && <span className={style.error }>Name can´t be empty</span>}
             <div className={style.columnForm}>
                 <label>Height</label>
                 <input type="Number" placeholder="0" min="0" name="height" onBlur={(e)=> onBlur(e)} tabIndex="2"/>
-                { errors.height && <span className={style.error}>Height can´t be 0</span>}
-                <label>Hp</label>
-                <input type="Number" placeholder="0" min="0" name="hp" onBlur={(e)=> onBlur(e)} tabIndex="4"/>
-                { errors.hp && <span className={style.error}>HP can´t be 0</span>}
-                <label>Attack</label>
-                <input type="Number" placeholder="0" min="0" name="attack" onBlur={(e)=> onBlur(e)} tabIndex="6"/>
-                { errors.attack && <span className={style.error}>Attack can´t be 0</span>}
             </div>
             <div className={style.columnForm}>
                 <label>Weight</label>
                 <input type="Number" placeholder="0" min="0" name="weight" onBlur={(e)=> onBlur(e)} tabIndex="3"/> 
-                { errors.weight && <span className={style.error}>Weight can´t be 0</span>}
+            </div>
+            <div className={style.rowForm} >
+                <div className={style.columnForm}>
+                        { errors.height && <span className={style.error}>Height can´t be 0</span>}
+                </div>
+                <div className={style.columnForm}>
+                        { errors.weight && <span className={style.error}>Weight can´t be 0</span>}
+                </div>
+            </div>
+            <div className={style.columnForm}>
+                <label>Hp</label>
+                <input type="Number" placeholder="0" min="0" name="hp" onBlur={(e)=> onBlur(e)} tabIndex="4"/>
+            </div>
+            <div className={style.columnForm}>
                 <label>Speed</label>
                 <input type="Number" placeholder="0" min="0" name="speed" onBlur={(e)=> onBlur(e)} tabIndex="5"/>
-                { errors.speed && <span className={style.error}>Speed can´t be 0</span>}
+            </div>
+            <div className={style.rowForm}>
+                <div className={style.columnForm}>
+                        { errors.hp && <span className={style.error}>HP can´t be 0</span>}
+                </div>
+                <div className={style.columnForm}>
+                        { errors.speed && <span className={style.error}>Speed can´t be 0</span>}
+                </div>
+            </div>
+            <div className={style.columnForm}>
+                <label>Attack</label>
+                <input type="Number" placeholder="0" min="0" name="attack" onBlur={(e)=> onBlur(e)} tabIndex="6"/> 
+            </div>
+            <div className={style.columnForm}>
                 <label>Defense</label>
                 <input type="Number" placeholder="0" min="0" name="defense" onBlur={(e)=> onBlur(e)} tabIndex="7"/>
-                { errors.defense && <span className={style.error}>Defense can´t be 0</span>}
             </div>
-        
+            <div className={style.rowForm}>
+                <div className={style.columnForm}>
+                        { errors.attack && <span className={style.error}>Attack can´t be 0</span>} 
+                </div>
+                <div className={style.columnForm}>
+                        { errors.defense && <span className={style.error}>Defense can´t be 0</span>}
+                </div>
+            </div>
             <label> Type:</label>
             <select ref={refType} tabIndex="8">
             <option value="" name="type">Type</option>
