@@ -5,7 +5,8 @@ const initialState = {
   page:1,
   toShow:[],
   totalPages:0,
-  PokemonDetail:{}
+  PokemonDetail:{},
+  createInfo:null
 };
 
 function sortAsc(arr,property){
@@ -60,7 +61,7 @@ function getShowPages(arr){
 
 //En nuestro estado guardaremos objetos con `todos`. Cada todo tendra: title, description, place, date, id y un status;
 const pokemons = (state = initialState, action) => {
-  // console.log("entre",action.type);
+  
   switch(action.type) {
     
     case "getPokemons":
@@ -133,6 +134,18 @@ const pokemons = (state = initialState, action) => {
         page:1
       };
 
+      case "createPokemon":
+       return  {
+          ...state,
+          createInfo:action.payload
+        };
+
+      case "resetStatusCreate":
+        return {
+          ...state,
+          createInfo:null
+        };
+
       case "reset":
       return {
         ...state,
@@ -140,6 +153,7 @@ const pokemons = (state = initialState, action) => {
         tmpPokemons:[],
         page:1,
         toShow:[],
+        createInfo:null,
         totalPages:0,
         PokemonDetail:{}
       };

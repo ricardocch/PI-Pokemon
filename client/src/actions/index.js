@@ -61,6 +61,27 @@ export function getByName(name) {
   }
 }
 
+export  function createPokemon(data) {
+
+  return function(dispatch){
+    fetch('http://www.localhost:3001/pokemons',{
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(json => {
+  
+      dispatch({ type: 'createPokemon',payload:json });
+    
+    }).catch( (error)=>{
+      
+    });
+  }
+  
+}
 export function getPage(num){
     return {
       type:'changePage',
@@ -95,5 +116,11 @@ export function search(search){
 export function reset(){
   return {
     type:'reset'
+  }
+}
+
+export function resetStatusCreate(){
+  return {
+    type:'resetStatusCreate'
   }
 }

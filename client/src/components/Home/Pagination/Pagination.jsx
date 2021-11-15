@@ -1,6 +1,5 @@
 import style from './Pagination.module.css';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'
 import {getPage} from '../../../actions/index'
 function Pagination({Pages,page,getPage}) {
 

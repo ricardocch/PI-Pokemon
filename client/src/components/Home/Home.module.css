@@ -3,18 +3,11 @@
     min-height: 90vh;
 }
 
-.Home select::-webkit-scrollbar {
-  width: 7px;
-}
 
 /* Track */
 .Home select::-webkit-scrollbar-track {
   background: yelow;
 }
 
-/* Handle */
-.Home select::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 25px;
-}
+
 

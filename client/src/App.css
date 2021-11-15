@@ -1,6 +1,3 @@
-.App {
-
-}
 
 button{
   display: inline-block;
@@ -22,6 +19,16 @@ button{
   transition: color .15s ease-in-out,
   border-color .15s ease-in-out,
   box-shadow .15s ease-in-out;
+}
+
+select::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Handle */
+select::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 25px;
 }
 
 

@@ -1,0 +1,94 @@
+.FormPokemon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+.FormPokemon form{
+    padding: 50px 0;
+    width:500px;
+}
+
+.FormPokemon label{
+    display: inline-block;
+    width: 10%;
+    margin-right: 15px;
+}
+
+.FormPokemon input[type='text']{
+    width: 80%;
+}
+
+.FormPokemon input[type='number']{
+    width: 60%;
+    margin-left: 25px;
+}
+
+.FormPokemon select{
+    width: 55%;
+    margin-right: 20px;
+}
+
+
+.FormPokemon input[type='text'],
+.FormPokemon input[type='number'],
+.FormPokemon select{
+    display: inline;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-bottom: 15px;
+    /* min-width: 400px; */
+}
+
+.FormPokemon button{
+    background-color: yellow;
+    color: #f51326;
+    height: 35px;
+    font-weight: 600;
+}
+
+.FormPokemon button:hover{
+    color: #2f68b1;
+}
+
+.FormPokemon button[type='submit']{
+    width: 100%;
+}
+
+.FormPokemon .ContainerType{
+    border: 1px solid #2f68b1;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.FormPokemon .ContainerType button{
+    margin: 5px;
+    background-color: #2f68b1;
+    color: white;
+}
+
+.FormPokemon .columnForm{
+    display: inline-block;
+    width: 50%;
+}
+
+.FormPokemon .error{
+    color: red;
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 100%;
+    /* width: 50%; */
+}
+
+
+
+

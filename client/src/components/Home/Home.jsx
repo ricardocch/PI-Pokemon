@@ -20,7 +20,7 @@ function Home({getTotalPokemons,Pokemon,TotalPokemons,reset}) {
   return (
     <div className={style.Home}>
       {TotalPokemons.length > 0  && <ActioonsContainer/>}
-      {TotalPokemons.length > 0 &&  Pokemon.length == 0  && <NotFound/>}
+      {TotalPokemons.length > 0 &&  Pokemon.length === 0  && <NotFound/>}
       {TotalPokemons.length === 0 ? <Loading/> : <CardContainer data={Pokemon}/>}
       {Pokemon.length > 0 && <Pagination/>}
     </div>

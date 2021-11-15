@@ -44,7 +44,7 @@ router.get("/types", function(req,res){
 
 router.get("/pokemons", async function(req,res){
     let query = req.query.hasOwnProperty('name') ? {where:{name:decodeURI(req.query.name)},include:Type} : {include:Type}
-    // console.log("poke")
+
     try{
     
     let PokemonsDB = await Pokemon.findAll(query);
@@ -130,7 +130,7 @@ router.get("/pokemons", async function(req,res){
     res.status(200).send([...pokemonAPI,...PokemonsDB])
     }
     catch(err){
-        console.log(err)
+        // console.log(err)
         res.status(404).send(err)
     }
 })
@@ -180,6 +180,7 @@ router.get("/pokemons/:id", async function(req,res){
 
 
 router.post('/pokemons',async function(req,res){
+ 
     try{
         let instance = await Pokemon.create({ 
             name: req.body.name,

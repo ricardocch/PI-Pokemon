@@ -8,7 +8,7 @@ function Filters({types,getTypes,filterCreated}) {
     let selectType = useRef('')
     let selectCreate = useRef('')
     useEffect(()=>{
-        getTypes()
+        if(types.length === 0)  getTypes()
     },[])
     
     function onChange(){

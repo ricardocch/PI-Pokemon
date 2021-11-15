@@ -1,5 +1,5 @@
 import style from './Detail.module.css';
-import {Link,useParams,useLocation,useNavigate} from 'react-router-dom'
+import {useParams,useLocation,useNavigate} from 'react-router-dom'
 import { useEffect } from 'react';
 import Pokedex from './Pokedex/Pokedex';
 import NotFound from '../Home/NotFound/NotFound'
