@@ -44,37 +44,22 @@ router.get("/types", function(req,res){
 
 router.get("/pokemons", async function(req,res){
     let query = req.query.hasOwnProperty('name') ? {where:{name:decodeURI(req.query.name)},include:Type} : {include:Type}
-
+    
     try{
     
-    let PokemonsDB = await Pokemon.findAll(query);
+    let PokemonsDB = Pokemon.findAll(query);
     let pokemonAPI = null;
-    
-    PokemonsDB = PokemonsDB.map( el =>{
-        let localArrTypes = el.types.map( el => el.name)
-        
-        return {
-            id:el.id,
-            name:el.name,
-            height:el.height,
-            weight:el.weight,
-            hp:el.hp,
-            attack:el.attack,
-            defense:el.defense,
-            speed:el.speed,
-            created:true,
-            img:'',
-            types:localArrTypes
-        }
-    })
+    let resPromise = null;
     
     if(req.query.hasOwnProperty('name')){
         
         try{
-            let tempArray = []
-            pokemonAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${req.query.name}`)
-            tempArray.push(pokemonAPI) 
-            pokemonAPI = tempArray;
+            // let tempArray = []
+            pokemonAPI =  axios.get(`https://pokeapi.co/api/v2/pokemon/${req.query.name}`)
+            // tempArray.push(pokemonAPI) 
+            // pokemonAPI = tempArray;
+            resPromise = await Promise.all([pokemonAPI,PokemonsDB])
+            resPromise[1] = [resPromise[1]]
         }
         catch{
             pokemonAPI = [];
@@ -84,9 +69,10 @@ router.get("/pokemons", async function(req,res){
     else{
         
         // endpoint sin parametros
-        // pokemonAPI = await axios.get('https://pokeapi.co/api/v2/pokemon')
-        // let SecondPart = await axios.get(pokemonAPI.data.next)
-        // pokemonAPI = pokemonAPI.data.results.map(el =>{
+        // pokemonAPI =  axios.get('https://pokeapi.co/api/v2/pokemon')
+        // resPromise = await Promise.all([pokemonAPI,PokemonsDB])
+        // let SecondPart = await axios.get(resPromise[0].data.next)
+        // pokemonAPI = resPromise[0].data.results.map(el =>{
         //     return axios.get(el.url)
         // })
 
@@ -94,21 +80,28 @@ router.get("/pokemons", async function(req,res){
         //     return axios.get(el.url)
         // })
 
+
         // pokemonAPI = [...pokemonAPI,...SecondPart]
-
-        // pokemonAPI = await Promise.all(pokemonAPI)
-
-        //endpoint con parametros
-        pokemonAPI = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=40')
         
-        pokemonAPI = pokemonAPI.data.results.map(el =>{
+        // pokemonAPI = await Promise.all(pokemonAPI)
+    
+
+
+        // //endpoint con parametros
+        pokemonAPI =  axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=40')
+        resPromise = await Promise.all([pokemonAPI,PokemonsDB])
+
+        pokemonAPI = resPromise[0].data.results.map(el =>{
             return axios.get(el.url)
         })
 
         pokemonAPI = await Promise.all(pokemonAPI)
-        
+
     }
 
+
+    pokemonAPI = req.query.hasOwnProperty('name') ? resPromise[0] : pokemonAPI
+    
     pokemonAPI = pokemonAPI.map(el => {
             
         let localArrTypes = el.data.types.map( el => el.type.name)
@@ -126,11 +119,31 @@ router.get("/pokemons", async function(req,res){
             types:localArrTypes
         }
     });
-    
+
+    PokemonsDB = resPromise[1].map( el =>{
+        let localArrTypes = el.types.map( el => el.name)
+        
+        return {
+            id:el.id,
+            name:el.name,
+            height:el.height,
+            weight:el.weight,
+            hp:el.hp,
+            attack:el.attack,
+            defense:el.defense,
+            speed:el.speed,
+            created:true,
+            img:'',
+            types:localArrTypes
+        }
+    })
     res.status(200).send([...pokemonAPI,...PokemonsDB])
+
+    // res.status(200).send('exito')
+
     }
     catch(err){
-        // console.log(err)
+        console.log(err)
         res.status(404).send(err)
     }
 })
