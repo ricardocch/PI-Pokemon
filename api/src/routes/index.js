@@ -49,20 +49,23 @@ router.get("/pokemons", async function(req,res){
     
     let PokemonsDB = Pokemon.findAll(query);
     let pokemonAPI = null;
-    let resPromise = null;
+    let resPromise = null; 
     
     if(req.query.hasOwnProperty('name')){
-        
+        PokemonsDB = await PokemonsDB;
         try{
             // let tempArray = []
-            pokemonAPI =  axios.get(`https://pokeapi.co/api/v2/pokemon/${req.query.name}`)
+            pokemonAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${req.query.name}`)
+            
             // tempArray.push(pokemonAPI) 
             // pokemonAPI = tempArray;
-            resPromise = await Promise.all([pokemonAPI,PokemonsDB])
-            resPromise[1] = [resPromise[1]]
+            resPromise = [[pokemonAPI],PokemonsDB]
+            console.log("p",resPromise);
+            
         }
-        catch{
-            pokemonAPI = [];
+        catch(err){
+            console.log("cathc",err);
+            resPromise = [[],PokemonsDB];
         }
         
     }
@@ -207,8 +210,18 @@ router.post('/pokemons',async function(req,res){
 
         
        instance.addTypes(req.body.type)
+
+       let loacalTypes = []
+
+       req.body.type.forEach(el =>{
+        loacalTypes.push(Type.findByPk(el))
+       })
         
-        res.status(200).send({...instance.toJSON(),succes:'Pokemon Creado con Exito'})
+       loacalTypes = await Promise.all(loacalTypes)
+       
+       loacalTypes = loacalTypes.map( el => el.name)
+       
+        res.status(200).send({...instance.toJSON(),created:true,img:'',types:loacalTypes,succes:'Pokemon Creado con Exito'})
     }
     catch(err){
         res.status(500).send({errMesage:'Fallo en la creación',err})

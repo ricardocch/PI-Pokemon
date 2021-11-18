@@ -73,7 +73,6 @@ export  function createPokemon(data) {
     })
     .then(response => response.json())
     .then(json => {
-  
       dispatch({ type: 'createPokemon',payload:json });
     
     }).catch( (error)=>{

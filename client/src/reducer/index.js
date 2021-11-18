@@ -116,7 +116,7 @@ function getShowPages(arr){
       return [toShow,arrPages]
 }
 
-//En nuestro estado guardaremos objetos con `todos`. Cada todo tendra: title, description, place, date, id y un status;
+
 const pokemons = (state = initialState, action) => {
   
   switch(action.type) {
@@ -199,9 +199,19 @@ const pokemons = (state = initialState, action) => {
       };
 
       case "createPokemon":
+        let addPokemonCreated = [...state.Pokemons]
+        addPokemonCreated = sortAsc(addPokemonCreated,'id')
+        addPokemonCreated.push(action.payload)
+        
+        let tmp5 = getShowPages(addPokemonCreated)
        return  {
           ...state,
-          createInfo:action.payload
+          Pokemons:addPokemonCreated,
+          tmpPokemons:addPokemonCreated,
+          createInfo:action.payload,
+          toShow:tmp5[0],
+          totalPages:tmp5[1],
+          Page:1
         };
 
       case "resetStatusCreate":
@@ -210,17 +220,17 @@ const pokemons = (state = initialState, action) => {
           createInfo:null
         };
 
-      case "reset":
-      return {
-        ...state,
-        Pokemons:[],
-        tmpPokemons:[],
-        page:1,
-        toShow:[],
-        createInfo:null,
-        totalPages:0,
-        PokemonDetail:{}
-      };
+      // case "reset":
+      // return {
+      //   ...state,
+      //   Pokemons:[],
+      //   tmpPokemons:[],
+      //   page:1,
+      //   toShow:[],
+      //   createInfo:null,
+      //   totalPages:0,
+      //   PokemonDetail:{}
+      // };
 
       // case "search":
 

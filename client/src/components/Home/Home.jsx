@@ -11,8 +11,8 @@ import NotFound from './NotFound/NotFound';
 function Home({getTotalPokemons,Pokemon,TotalPokemons,reset}) {
   
   useEffect( ()=>{
-    reset()
-    getTotalPokemons()
+    // reset()
+   if(TotalPokemons.length === 0) getTotalPokemons()
   
   },[])
 
