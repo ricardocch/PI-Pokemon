@@ -55,7 +55,7 @@ router.get("/pokemons", async function(req,res){
         PokemonsDB = await PokemonsDB;
         try{
             // let tempArray = []
-            pokemonAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${req.query.name}`)
+            pokemonAPI = await axios.get(`https://pokeapi.co/api/v2/pokemon/${req.query.name}`,{timeout:600000})
             
             // tempArray.push(pokemonAPI) 
             // pokemonAPI = tempArray;
@@ -91,14 +91,20 @@ router.get("/pokemons", async function(req,res){
 
 
         // //endpoint con parametros
-        pokemonAPI =  axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=40')
-        resPromise = await Promise.all([pokemonAPI,PokemonsDB])
-
-        pokemonAPI = resPromise[0].data.results.map(el =>{
-            return axios.get(el.url)
-        })
-
-        pokemonAPI = await Promise.all(pokemonAPI)
+        try{
+            pokemonAPI =  axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=40')
+            resPromise = await Promise.all([pokemonAPI,PokemonsDB])
+    
+            pokemonAPI = resPromise[0].data.results.map(el =>{
+                return axios.get(el.url)
+            })
+    
+            pokemonAPI = await Promise.all(pokemonAPI)
+        }catch(err){
+            console.log(err);
+            // res.status(404).send({err:'error al cargar la API'})
+        }
+      
 
     }
 
