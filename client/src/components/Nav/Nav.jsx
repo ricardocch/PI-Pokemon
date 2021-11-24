@@ -18,7 +18,7 @@ function Nav({search,getByName}) {
   // }
 
   function onSearchName(){
-    getByName(name.current.value)
+    getByName(name.current.value.toLowerCase())
     navigate(`/detail?name=${name.current.value}`)
   }
 
