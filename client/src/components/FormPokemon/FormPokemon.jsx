@@ -71,10 +71,12 @@ function FormPokemon({types,createInfo,getTypes,createPokemon,resetStatusCreate}
     }
 
     function onBlur(e){
-
-        if(e.target.value === '' || parseInt(e.target.value) === 0){
+        
+  
+        
+        if(e.target.value === '' || parseInt(e.target.value) === 0 || (e.target.name === 'name' && !/^[A-Za-z]+$/.test(e.target.value))){
             setErros({...errors,
-                [e.target.name]:true
+                [e.target.name]:true,
             })
         } 
         else{
@@ -92,7 +94,7 @@ function FormPokemon({types,createInfo,getTypes,createPokemon,resetStatusCreate}
 
         for(let i = 0; i < e.target.length;i++){
 
-            if(e.target[i].localName === "input" && e.target[i].value === '') 
+            if(e.target[i].localName === "input" && e.target[i].value === '' ) 
                 tmpErrors = {...tmpErrors,[e.target[i].name]:true}
             else if(e.target[i].localName === "input" && e.target[i].value !== '')
                 data = {...data,[e.target[i].name]: isNaN(Number(e.target[i].value)) ? e.target[i].value : Number(e.target[i].value) }
@@ -114,7 +116,7 @@ function FormPokemon({types,createInfo,getTypes,createPokemon,resetStatusCreate}
         <form onSubmit={(e) => onSubmit(e)} ref={refForm}>
             <label>Name</label>
             <input type="text" placeholder="Enter name" name="name" onBlur={(e)=> onBlur(e)} tabIndex="1"/>
-            { errors.name  && <span className={style.error }>Name can´t be empty</span>}
+            {  errors.name && <span className={style.error }>Name must have only letters</span>}
             <div className={style.columnForm}>
                 <label>Height</label>
                 <input type="Number" placeholder="0" min="0" name="height" onBlur={(e)=> onBlur(e)} tabIndex="2"/>
